@@ -1,0 +1,90 @@
+{
+	"_class": "com.tikal.jenkins.plugins.multijob.MultiJobProject",
+	"name": "teste",
+	"buildable": true,
+	"builds": [
+		{
+			"_class": "com.tikal.jenkins.plugins.multijob.MultiJobBuild",
+			"actions": [
+				{
+					"_class": "hudson.model.CauseAction",
+					"causes": [
+						{
+							"_class": "hudson.model.Cause$UserIdCause",
+							"shortDescription": "Iniciado pelo usuário admin",
+							"userId": "admin",
+							"userName": "admin"
+						}
+					]
+				},
+				{},
+				{},
+				{},
+				{},
+				{},
+				{}
+			],
+			"duration": 9998,
+			"number": 2,
+			"result": "SUCCESS",
+			"timestamp": 1493396815561,
+			"subBuilds": [
+				{
+					"buildNumber": 1,
+					"duration": "5 ms",
+					"jobName": "teste1",
+					"parentBuildNumber": 2,
+					"parentJobName": "teste",
+					"phaseName": "testes",
+					"result": "SUCCESS"
+				}
+			]
+		},
+		{
+			"_class": "com.tikal.jenkins.plugins.multijob.MultiJobBuild",
+			"actions": [
+				{
+					"_class": "hudson.model.CauseAction",
+					"causes": [
+						{
+							"_class": "hudson.model.Cause$UserIdCause",
+							"shortDescription": "Iniciado pelo usuário admin",
+							"userId": "admin",
+							"userName": "admin"
+						}
+					]
+				},
+				{},
+				{},
+				{},
+				{}
+			],
+			"duration": 120,
+			"number": 1,
+			"result": "SUCCESS",
+			"timestamp": 1493396326390,
+			"subBuilds": []
+		}
+	],
+	"healthReport": [
+		{
+			"description": "Estabilidade de builds: Nenhuma builds recente falhou.",
+			"score": 100
+		}
+	],
+	"lastBuild": {
+		"_class": "com.tikal.jenkins.plugins.multijob.MultiJobBuild",
+		"duration": 9998,
+		"number": 2,
+		"result": "SUCCESS",
+		"timestamp": 1493396815561
+	},
+	"lastSuccessfulBuild": {
+		"_class": "com.tikal.jenkins.plugins.multijob.MultiJobBuild",
+		"duration": 9998,
+		"number": 2,
+		"result": "SUCCESS",
+		"timestamp": 1493396815561
+	},
+	"lastUnsuccessfulBuild": null
+}
