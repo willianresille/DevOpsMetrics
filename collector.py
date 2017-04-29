@@ -32,23 +32,28 @@ for k,v in data.items():
         #print("Ultimo Build: " +str(v))
     if(k == "builds"):
         #dict
-        #pprint(v)
+        #Builds
+        print(k)
         for item in v:
-            #print(item)
             for k1,k2 in item.items():
                 if type(k2) == list:
-                    #print(k2)
+                    #SubBuilds
+                    print("     "+k1)
                     for item2 in k2:
                         for l1,l2 in item2.items():
-                            print("         "+l1)
+                            if(l1 == "causes"):
+                                print("         "+l1)
+                            else:
+                                print("         "+l1+": "+str(l2))
                             if type(l2) == list:
                                 for t1 in l2:
                                     for key,value in t1.items():
                                         print("             "+key+": ",value)
-                                    print("#########################################################################")
-                    print("-----------------------------------------------------------------------------------------------------")
+
+
                 else:
                     print("     "+k1+": ",k2)
+            print("-----------------------------------------------------------------------------------------------------")
                 #print("\n")
 
 
