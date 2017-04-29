@@ -1,84 +1,71 @@
-import pdb
 import json
 
-
-from pprint import pprint
-
 with open('Formatted JSON.json') as data_file:
-    data = json.load(data_file)
+    job_json = json.load(data_file)
 
-#pprint(data)
+for keyJobJson,valueJobJson in job_json.items():
 
-#name_job = str(data['name'])
-#job_enable = str(data['buildable'])
-#print("Nome do Job: " + name_job)
-#print("Habilitado: " +job_enable)
-#print("     Builds:")
-#print("             Iniciado por:" +str(data[builds[actions[userName]]]))
+    if(keyJobJson == "name"):
+        print("Nome: "+valueJobJson)
 
+    if(keyJobJson == "buildable"):
+        print("Habilitado: " +str(valueJobJson))
 
-for k,v in data.items():
-    #print(k+": ",v)
-    if(k == "name"):
-        print("Nome: "+v)
-    if(k == "buildable"):
-        #boolean
-        print("Habilitado: " +str(v))
-    if(k == "healthReport"):
-        #dict
+    if(keyJobJson == "healthReport"):
         print("Health Report: ")
-        for item in v:
-            for k,y in item.items():
-                if(k != "_class"):
-                    print("     "+k+": ",y)
-    if(k == "lastBuild"):
-        #dict
+        for healthReport in valueJobJson:
+            for key,value in healthReport.items():
+                if(key != "_class"):
+                    print("     "+key+": ",value)
+
+    if(keyJobJson == "lastBuild"):
         print("Ultimo Build: ")
-        for k,y in v.items():
-            if(k != "_class"):
-                print("     "+k+": ",y)
-    if(k == "builds"):
+        for keyLastBuild,valueLastBuild in valueJobJson.items():
+            if(keyLastBuild != "_class"):
+                print("     "+keyLastBuild+": ",valueLastBuild)
+
+    if(keyJobJson == "builds"):
         #dict
         #Builds
-        print(k)
-        for item in v:
-            for k1,k2 in item.items():
-                if type(k2) == list:
+        print(keyJobJson)
+        for builds in valueJobJson:
+            for keyBuilds,valueBuilds in builds.items():
+                if type(valueBuilds) == list:
                     #SubBuilds
-                    print("     "+k1)
-                    for item2 in k2:
-                        for l1,l2 in item2.items():
-                            if(l1 == "causes"):
-                                print("         "+l1)
-                            elif(l1 != "_class"):
-                                print("         "+l1+": "+str(l2))
-                            if type(l2) == list:
-                                for t1 in l2:
-                                    for key,value in t1.items():
-                                        if(key != "_class"):
-                                            print("             "+key+": ",value)
+                    print("     "+keyBuilds)
+                    for subBuildsAndCauses in valueBuilds:
+                        for keySubBuildsAndCauses,valueSubBuildsAndCauses in subBuildsAndCauses.items():
+                            if(keySubBuildsAndCauses == "causes"):
+                                print("         "+keySubBuildsAndCauses)
+                            elif(keySubBuildsAndCauses != "_class"):
+                                print("         "+keySubBuildsAndCauses+": "+str(valueSubBuildsAndCauses))
+                            if type(valueSubBuildsAndCauses) == list:
+                                for causes in valueSubBuildsAndCauses:
+                                    for keyCauses,valueCauses in causes.items():
+                                        if(keyCauses != "_class"):
+                                            print("             "+keyCauses+": ",valueCauses)
                 else:
-                    if(k1 != "_class"):
-                        print("     "+k1+": ",k2)
+                    if(keyBuilds != "_class"):
+                        print("     "+keyBuilds+": ",valueBuilds)
             print("-----------------------------------------------------------------------------------------------------")
-                #print("\n")
 
-
-
-        #print("Builds: " + str(json_data))
-    if(k == "lastSuccessfulBuild"):
+    if(keyJobJson == "lastSuccessfulBuild"):
         #dict
         print("Ultimo Build com Sucesso: ")
-        for k,y in v.items():
-            if(k != "_class"):
-                print("     "+k+": ",y)
-    if(k == "lastUnsuccessfulBuild"):
-        #dict
-        print("Ultimo Build sem sucesso: ")
-        if(k == dict):
-            for k,y in v.items():
+        if(type(valueJobJson) == dict):
+            for k,y in valueJobJson.items():
                 if(k != "_class"):
                     print("     "+k+": ",y)
         else:
-            print("         None")
+            print("         "+str(valueJobJson))
+
+    if(keyJobJson == "lastUnsuccessfulBuild"):
+        #dict
+        print("Ultimo Build sem sucesso: ")
+        if(type(valueJobJson) == dict):
+            for k,y in valueJobJson.items():
+                if(k != "_class"):
+                    print("     "+k+": ",y)
+        else:
+            print("         "+str(valueJobJson))
     #print("\n")
