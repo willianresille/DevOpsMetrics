@@ -40,7 +40,7 @@ for k,v in data.items():
                     #print(k2)
                     for item2 in k2:
                         for l1,l2 in item2.items():
-                            print("         "+l1+": ",l2)
+                            print("         "+l1)
                             if type(l2) == list:
                                 for t1 in l2:
                                     for key,value in t1.items():
