@@ -1,22 +1,25 @@
 import json
+from object.job import Job
 
+job = Job()
 with open('Formatted JSON.json') as data_file:
     job_json = json.load(data_file)
 
 for keyJobJson,valueJobJson in job_json.items():
 
     if(keyJobJson == "name"):
-        print("Nome: "+valueJobJson)
+        job.setName(valueJobJson)
+        print("Nome: "+job.name)
 
     if(keyJobJson == "buildable"):
-        print("Habilitado: " +str(valueJobJson))
+        job.setBuildable(valueJobJson)
+        print("Habilitado: " +str(job.buildable))
 
     if(keyJobJson == "healthReport"):
         print("Health Report: ")
-        for healthReport in valueJobJson:
-            for key,value in healthReport.items():
-                if(key != "_class"):
-                    print("     "+key+": ",value)
+        job.setHealthReport(valueJobJson)
+        print("     Description: "+job.healthReport.description)
+        print("     Score: "+str(job.healthReport.score))
 
     if(keyJobJson == "lastBuild"):
         print("Ultimo Build: ")
@@ -27,6 +30,7 @@ for keyJobJson,valueJobJson in job_json.items():
     if(keyJobJson == "builds"):
         #dict
         #Builds
+        job.setBuild(valueJobJson)
         print(keyJobJson)
         for builds in valueJobJson:
             for keyBuilds,valueBuilds in builds.items():
