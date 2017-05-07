@@ -9,23 +9,15 @@ for keyJobJson,valueJobJson in job_json.items():
 
     if(keyJobJson == "name"):
         job.setName(valueJobJson)
-        print("Nome: "+job.name)
 
     if(keyJobJson == "buildable"):
         job.setBuildable(valueJobJson)
-        print("Habilitado: " +str(job.buildable))
 
     if(keyJobJson == "healthReport"):
-        print("Health Report: ")
         job.setHealthReport(valueJobJson)
-        print("     Description: "+job.healthReport.description)
-        print("     Score: "+str(job.healthReport.score))
 
     if(keyJobJson == "lastBuild"):
-        print("Ultimo Build: ")
-        for keyLastBuild,valueLastBuild in valueJobJson.items():
-            if(keyLastBuild != "_class"):
-                print("     "+keyLastBuild+": ",valueLastBuild)
+        job.setLastBuild(valueJobJson)
 
     if(keyJobJson == "builds"):
         #dict
@@ -54,22 +46,30 @@ for keyJobJson,valueJobJson in job_json.items():
             print("-----------------------------------------------------------------------------------------------------")
 
     if(keyJobJson == "lastSuccessfulBuild"):
-        #dict
-        print("Ultimo Build com Sucesso: ")
-        if(type(valueJobJson) == dict):
-            for k,y in valueJobJson.items():
-                if(k != "_class"):
-                    print("     "+k+": ",y)
-        else:
-            print("         "+str(valueJobJson))
+        job.setLastSuccessfulBuild(valueJobJson)
 
     if(keyJobJson == "lastUnsuccessfulBuild"):
-        #dict
-        print("Ultimo Build sem sucesso: ")
-        if(type(valueJobJson) == dict):
-            for k,y in valueJobJson.items():
-                if(k != "_class"):
-                    print("     "+k+": ",y)
-        else:
-            print("         "+str(valueJobJson))
-    #print("\n")
+        job.setLastUnsuccessfulBuild(valueJobJson)
+
+    def imprimeBuild(build):
+        if hasattr(build, 'number'):
+            print("         Number: "+str(build.number))
+        if hasattr(build, 'result'):
+            print("         Result: "+build.result)
+        if hasattr(build, 'duration'):
+            print("         Duration:"+str(build.duration))
+        if hasattr(build, 'timestamp'):
+            print("         Timestamp: "+str(build.timestamp))
+
+print("JOB:")
+print("     Nome: "+job.name)
+print("     Habilitado: " +str(job.buildable))
+print("     Health Report: ")
+print("         Description: "+job.healthReport.description)
+print("         Score: "+str(job.healthReport.score))
+print("     LastBuild:")
+imprimeBuild(job.lastBuild)
+print("     LastSuccessfulBuild:")
+imprimeBuild(job.lastSuccessfulBuild)
+print("     lastUnsuccessfulBuild:")
+imprimeBuild(job.lastUnsuccessfulBuild)
